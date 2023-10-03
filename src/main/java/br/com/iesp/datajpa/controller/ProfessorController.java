@@ -1,23 +1,39 @@
 package br.com.iesp.datajpa.controller;
 
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
+import br.com.iesp.datajpa.dto.ProfessorDTO;
+import br.com.iesp.datajpa.dto.ProfessorDTOView;
 import br.com.iesp.datajpa.service.ProfessorService;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+@RequestMapping("/professor")
 @RestController
-@RequestMapping("v1/professor")
 public class ProfessorController {
-	
-	private ProfessorService professorService;
 
-	
-	@Autowired
-	public ProfessorController(ProfessorService professorService) {
-		this.professorService = professorService;
-	}
+    @Autowired
+    ProfessorService service;
 
-	
-	
+    @PostMapping
+    public ResponseEntity<?> incluirProfessor(@RequestBody ProfessorDTO form){
+        try{
+            service.incluirProfessor(form);
+            return ResponseEntity.status(HttpStatus.CREATED).build();
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
+    @GetMapping
+    public ResponseEntity<?> listarTodos(){
+        try{
+            List<ProfessorDTOView> retorno = service.listarProfessor();
+            return ResponseEntity.ok(retorno);
+        }catch (Exception e){
+            return ResponseEntity.badRequest().build();
+        }
+    }
 }

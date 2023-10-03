@@ -1,8 +1,13 @@
 package br.com.iesp.datajpa.service;
 
-import org.springframework.web.context.annotation.ApplicationScope;
+import br.com.iesp.datajpa.dto.ProfessorDTO;
+import br.com.iesp.datajpa.dto.ProfessorDTOView;
 
-@ApplicationScope
-public class ProfessorService {
+import java.util.List;
 
+public interface ProfessorService {
+
+    void incluirProfessor(ProfessorDTO form);
+
+    List<ProfessorDTOView> listarProfessor();
 }
