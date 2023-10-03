@@ -1,9 +1,19 @@
 package br.com.iesp.datajpa.dto;
 
-import lombok.Builder;
-import lombok.extern.jackson.Jacksonized;
+import br.com.iesp.datajpa.entities.Professor;
+import br.com.iesp.datajpa.entities.Universidade;
+import lombok.Data;
 
-@Jacksonized @Builder
+@Data
 public class AlunoDTO {
 
+	private String nome;
+	
+	private Professor professor;
+	
+	private Universidade universidade;
+	
+	public AlunoDTO() {
+		
+	}
 }
